@@ -32,6 +32,20 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
     build_response("Hello Mnesia", conn)
   end
 
+  post "/api/insert" do
+    try do
+      with request <- conn.body_params |> DataTypeUtils.normalize() do
+        build_response(request, conn)
+      else
+        {:error, error} -> build_bad_request_response(error, conn)
+      end
+    rescue
+      error in Exception ->
+        IO.inspect(error, label: "Error occurred")
+        build_response("Error occurred apirest", conn)
+    end
+  end
+
 
   def build_response(%{status: status, body: body}, conn) do
     conn
