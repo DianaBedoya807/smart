@@ -6,6 +6,7 @@ defmodule Smart.Application do
   alias Smart.Infrastructure.EntryPoint.ApiRest
   alias Smart.Config.{AppConfig, ConfigHolder}
   alias Smart.Utils.CustomTelemetry
+  alias Smart.Infrastructure.DrivenAdapters.Mnesia.Mnesia
 
   use Application
   require Logger
@@ -40,6 +41,8 @@ defmodule Smart.Application do
   end
 
   def env_children(_other_env) do
-    []
+    [
+      {Mnesia, []}
+    ]
   end
 end

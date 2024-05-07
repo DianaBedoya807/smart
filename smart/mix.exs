@@ -34,7 +34,7 @@ defmodule Smart.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :opentelemetry_exporter, :opentelemetry],
+      extra_applications: [:logger, :opentelemetry_exporter, :opentelemetry, :mnesia],
       mod: {Smart.Application, [Mix.env()]}
     ]
   end

@@ -1,10 +1,10 @@
 defmodule Smart.Infrastructure.EntryPoint.ApiRest do
-
   @moduledoc """
   Access point to the rest exposed services
   """
   alias Smart.Utils.DataTypeUtils
   alias Smart.Infrastructure.EntryPoint.ErrorHandler
+  alias Smart.Domain.Model.Student
   require Logger
   use Plug.Router
   use Timex
@@ -17,7 +17,7 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
 
   plug(Plug.Logger, log: :debug)
   plug(:match)
-  plug OpentelemetryPlug.Propagation
+  plug(OpentelemetryPlug.Propagation)
   plug(Plug.Parsers, parsers: [:urlencoded, :json], json_decoder: Poison)
   plug(Plug.Telemetry, event_prefix: [:smart, :plug])
   plug(:dispatch)
@@ -25,7 +25,11 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
   forward(
     "/api/health",
     to: PlugCheckup,
-    init_opts: PlugCheckup.Options.new(json_encoder: Jason, checks: Smart.Infrastructure.EntryPoint.HealthCheck.checks)
+    init_opts:
+      PlugCheckup.Options.new(
+        json_encoder: Jason,
+        checks: Smart.Infrastructure.EntryPoint.HealthCheck.checks()
+      )
   )
 
   get "/api/hello" do
@@ -34,8 +38,9 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
 
   post "/api/insert" do
     try do
-      with request <- conn.body_params |> DataTypeUtils.normalize() do
-        build_response(request, conn)
+      with request <- conn.body_params |> DataTypeUtils.normalize(),
+           {:ok, data} <- Student.new_student(request) do
+        build_response(data, conn)
       else
         {:error, error} -> build_bad_request_response(error, conn)
       end
@@ -45,7 +50,6 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
         build_response("Error occurred apirest", conn)
     end
   end
-
 
   def build_response(%{status: status, body: body}, conn) do
     conn
