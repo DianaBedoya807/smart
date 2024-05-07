@@ -10,6 +10,9 @@ config :smart,
   in_test: true,
   custom_metrics_prefix_name: "smart_test"
 
+config :smart,
+  student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter
+
 config :logger,
   level: :info
 

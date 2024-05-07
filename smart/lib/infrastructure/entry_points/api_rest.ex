@@ -5,6 +5,7 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
   alias Smart.Utils.DataTypeUtils
   alias Smart.Infrastructure.EntryPoint.ErrorHandler
   alias Smart.Domain.Model.Student
+  alias Smart.Domain.UseCases.Student.StudentUsecase
   require Logger
   use Plug.Router
   use Timex
@@ -39,8 +40,9 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
   post "/api/insert" do
     try do
       with request <- conn.body_params |> DataTypeUtils.normalize(),
-           {:ok, data} <- Student.new_student(request) do
-        build_response(data, conn)
+           {:ok, data} <- Student.new_student(request),
+           {:ok, response} <- StudentUsecase.register_student(data) do
+        build_response(response, conn)
       else
         {:error, error} -> build_bad_request_response(error, conn)
       end
@@ -48,6 +50,22 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
       error in Exception ->
         IO.inspect(error, label: "Error occurred")
         build_response("Error occurred apirest", conn)
+    end
+  end
+
+  post "/api/getstudent" do
+    try do
+      with request <- conn.body_params |> DataTypeUtils.normalize(),
+           {:ok, data} <- Student.new_student(request),
+           {:ok, response} <- StudentUsecase.get_student(data.numberId) do
+        build_response(response, conn)
+      else
+        {:error, error} -> build_bad_request_response(error, conn)
+      end
+    rescue
+      error in Exception ->
+        IO.inspect(error, label: "Error occurred")
+        build_response("Error occurred getstudent", conn)
     end
   end
 
