@@ -6,13 +6,23 @@ defmodule Smart.Config.AppConfig do
 
    defstruct [
      :enable_server,
-     :http_port
+     :http_port,
+     :database,
+     :username,
+     :password,
+     :hostname,
+     :port
    ]
 
    def load_config do
      %__MODULE__{
        enable_server: load(:enable_server),
-       http_port: load(:http_port)
+       http_port: load(:http_port),
+       database: load(:database),
+       username: load(:username),
+       password: load(:password),
+       hostname: load(:hostname),
+       port: load(:port)
      }
    end
 

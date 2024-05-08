@@ -42,6 +42,8 @@ defmodule Smart.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ecto_sql, "~> 3.11"},
+      {:myxql, "~> 0.6.4"},
       {:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "master"},
       {:opentelemetry_api, "~> 1.0"},
       {:opentelemetry_exporter, "~> 1.0"},
