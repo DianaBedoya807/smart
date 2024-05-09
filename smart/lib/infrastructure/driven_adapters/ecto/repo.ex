@@ -1,10 +1,12 @@
 defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Repo do
 
   alias Smart.Config.ConfigHolder
+  alias Ecto.Adapters.SQL
+  alias DBConnection.ConnectionError
 
   use Ecto.Repo,
     otp_app: :smart,
-    adapter: Ecto.Adapters.MyXQL
+    adapter: Ecto.Adapters.Postgres
 
   require Logger
 
@@ -28,17 +30,15 @@ defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Repo do
     {:ok, config}
   end
 
-  def check_db_health do
+  def health() do
+    SQL.query(__MODULE__, "select 1", [], source: "health") |> IO.inspect()
     try do
-      query_health("SELECT 1")
-      :ok
+      case SQL.query(__MODULE__, "select 1", [], source: "health") do
+        {:ok, _res} -> {:ok, :true}
+        _error -> :error
+      end
     rescue
-      _e in DBConnection.ConnectionError ->
-        :error
+      ConnectionError -> :error
     end
-  end
-
-  defp query_health(sql) do
-    Ecto.Adapters.SQL.query!(Repo, sql)
   end
 end

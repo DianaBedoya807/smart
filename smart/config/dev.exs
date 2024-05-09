@@ -14,11 +14,11 @@ config :smart,
   student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter
 
 config :smart,
-  database: "mi_escuela",
-  username: "bryserna",
-  password: "Cambio1234*+",
+  database: "postgres",
+  username: "postgres",
+  password: "system",
   hostname: "localhost",
-  port: 3306
+  port: "5432"
 
 config :logger,
   level: :debug
