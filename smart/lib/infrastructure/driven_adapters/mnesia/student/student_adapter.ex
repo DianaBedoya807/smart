@@ -5,12 +5,19 @@ defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
   @behaviour StudentRepositoryBehaviour
 
   def save_student(student) do
-    case :mnesia.transaction(fn ->
-           :mnesia.write(
-             {:students, student.numberId, student.name, student.lastname, student.age,
-              student.gender, student.address, student.email, student.phone}
-           )
-         end) do
+    {time, result} = :timer.tc(fn ->
+      :mnesia.transaction(fn ->
+        :mnesia.write(
+          {:students, student.numberId, student.name, student.lastname, student.age,
+           student.gender, student.address, student.email, student.phone}
+        )
+      end)
+    end)
+
+    IO.puts("save_student took #{time} microseconds")
+    IO.puts("save_student took #{div(time, 1000)} milliseconds")
+
+    case result do
       {:atomic, :ok} ->
         {:ok, "Student was saved successfully."}
 
@@ -20,9 +27,16 @@ defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
   end
 
   def get_student(numberId) do
-    case :mnesia.transaction(fn ->
-           :mnesia.read({:students, numberId})
-         end) do
+    {time, result} = :timer.tc(fn ->
+      :mnesia.transaction(fn ->
+        :mnesia.read({:students, numberId})
+      end)
+    end)
+
+    IO.puts("get_student took #{time} microseconds")
+    IO.puts("get_student took #{div(time, 1000)} milliseconds")
+
+    case result do
       {:atomic, [{:students, numberId, name, lastname, age, gender, address, email, phone}]} ->
         {:ok,
          %Student{
