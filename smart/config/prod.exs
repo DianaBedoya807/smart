@@ -11,7 +11,8 @@ config :smart,
   custom_metrics_prefix_name: "smart"
 
 config :smart,
-  student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter
+  student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter,
+  teacher_repository: Smart.Infrastructure.DrivenAdapters.Ecto.Teacher.TeacherAdapter
 
 config :smart,
   database: "postgres",

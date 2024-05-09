@@ -31,7 +31,6 @@ defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Repo do
   end
 
   def health() do
-    SQL.query(__MODULE__, "select 1", [], source: "health") |> IO.inspect()
     try do
       case SQL.query(__MODULE__, "select 1", [], source: "health") do
         {:ok, _res} -> {:ok, :true}

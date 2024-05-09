@@ -6,6 +6,9 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
   alias Smart.Infrastructure.EntryPoint.ErrorHandler
   alias Smart.Domain.Model.Student
   alias Smart.Domain.UseCases.Student.StudentUsecase
+  alias Smart.Domain.Model.Teacher
+  alias Smart.Domain.UseCases.Teacher.TeacherUsecase
+
   require Logger
   use Plug.Router
   use Timex
@@ -66,6 +69,22 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
       error in Exception ->
         IO.inspect(error, label: "Error occurred")
         build_response("Error occurred getstudent", conn)
+    end
+  end
+
+  post "/api/getteacher" do
+    try do
+      with request <- conn.body_params |> DataTypeUtils.normalize(),
+           {:ok, data} <- Teacher.new_teacher(request),
+           {:ok, response} <- TeacherUsecase.get_teacher(data.numberId) do
+        build_response(response, conn)
+      else
+        {:error, error} -> build_bad_request_response(error, conn)
+      end
+    rescue
+      error in Exception ->
+        IO.inspect(error, label: "Error occurred")
+        build_response("Error occurred getteacher", conn)
     end
   end
 
