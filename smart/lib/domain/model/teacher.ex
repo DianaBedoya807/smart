@@ -1,13 +1,13 @@
 defmodule Smart.Domain.Model.Teacher do
   alias __MODULE__
-  defstruct [:name, :lastname, :numberId, :age, :gender, :address, :email, :phone]
+  defstruct [:name, :lastname, :numberid, :age, :gender, :address, :email, :phone]
 
   def new_teacher(params) do
     {:ok,
      %__MODULE__{
        name: get_in(params, [:data, :name]),
        lastname: get_in(params, [:data, :lastname]),
-       numberId: get_in(params, [:data, :numberId]),
+       numberid: get_in(params, [:data, :numberid]),
        age: get_in(params, [:data, :age]),
        gender: get_in(params, [:data, :gender]),
        address: get_in(params, [:data, :address]),

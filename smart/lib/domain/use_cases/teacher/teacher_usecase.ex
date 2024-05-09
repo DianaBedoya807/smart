@@ -11,4 +11,12 @@ defmodule Smart.Domain.UseCases.Teacher.TeacherUsecase do
     end
   end
 
+  def insert_teacher(teacher) do
+    with {:ok, response} <- @teacher_repository.insert_teacher(teacher) do
+      {:ok, response}
+    else
+      {:error, error} -> {:error, error}
+    end
+  end
+
 end

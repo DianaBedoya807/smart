@@ -5,14 +5,15 @@ defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
   @behaviour StudentRepositoryBehaviour
 
   def save_student(student) do
-    {time, result} = :timer.tc(fn ->
-      :mnesia.transaction(fn ->
-        :mnesia.write(
-          {:students, student.numberId, student.name, student.lastname, student.age,
-           student.gender, student.address, student.email, student.phone}
-        )
+    {time, result} =
+      :timer.tc(fn ->
+        :mnesia.transaction(fn ->
+          :mnesia.write(
+            {:students, student.numberId, student.name, student.lastname, student.age,
+             student.gender, student.address, student.email, student.phone}
+          )
+        end)
       end)
-    end)
 
     IO.puts("save_student took #{time} microseconds")
     IO.puts("save_student took #{div(time, 1000)} milliseconds")
@@ -27,11 +28,12 @@ defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
   end
 
   def get_student(numberId) do
-    {time, result} = :timer.tc(fn ->
-      :mnesia.transaction(fn ->
-        :mnesia.read({:students, numberId})
+    {time, result} =
+      :timer.tc(fn ->
+        :mnesia.transaction(fn ->
+          :mnesia.read({:students, numberId})
+        end)
       end)
-    end)
 
     IO.puts("get_student took #{time} microseconds")
     IO.puts("get_student took #{div(time, 1000)} milliseconds")
@@ -49,6 +51,12 @@ defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
            email: email,
            phone: phone
          }}
+
+      {:atomic, []} ->
+        {:error, "No student found with the given numberId"}
+
+      _ ->
+        {:error, "An unexpected error occurred"}
     end
   end
 end

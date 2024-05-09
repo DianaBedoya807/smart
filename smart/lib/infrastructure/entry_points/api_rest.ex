@@ -75,8 +75,8 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
   post "/api/getteacher" do
     try do
       with request <- conn.body_params |> DataTypeUtils.normalize(),
-           {:ok, data} <- Teacher.new_teacher(request),
-           {:ok, response} <- TeacherUsecase.get_teacher(data.numberId) do
+           {:ok, data} <- Teacher.new_teacher(request) |> IO.inspect(),
+           {:ok, response} <- TeacherUsecase.get_teacher(data.numberid) do
         build_response(response, conn)
       else
         {:error, error} -> build_bad_request_response(error, conn)
@@ -85,6 +85,22 @@ defmodule Smart.Infrastructure.EntryPoint.ApiRest do
       error in Exception ->
         IO.inspect(error, label: "Error occurred")
         build_response("Error occurred getteacher", conn)
+    end
+  end
+
+  post "/api/insertteacher" do
+    try do
+      with request <- conn.body_params |> DataTypeUtils.normalize(),
+           {:ok, data} <- Teacher.new_teacher(request),
+           {:ok, response} <- TeacherUsecase.insert_teacher(data) do
+        build_response(response, conn)
+      else
+        {:error, error} -> build_bad_request_response(error, conn)
+      end
+    rescue
+      error in Exception ->
+        IO.inspect(error, label: "Error occurred")
+        build_response("Error occurred insertteacher", conn)
     end
   end
 
