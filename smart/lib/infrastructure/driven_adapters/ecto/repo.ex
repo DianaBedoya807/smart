@@ -6,8 +6,6 @@ defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Repo do
     otp_app: :smart,
     adapter: Ecto.Adapters.MyXQL
 
-  require Logger
-
   def init(_, config) do
     %{
       username: username,
@@ -23,7 +21,7 @@ defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Repo do
       |> Keyword.put(:port, port)
       |> Keyword.put(:username, username)
       |> Keyword.put(:password, password)
-      |> Keyword.put(:database, database)
+      |> Keyword.put(:database, database) |> IO.inspect()
 
     {:ok, config}
   end

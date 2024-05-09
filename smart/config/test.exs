@@ -13,12 +13,6 @@ config :smart,
 config :smart,
   student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter
 
-config :smart,
-  database: "mi_escuela",
-  username: "bryserna",
-  password: "Cambio1234*+",
-  hostname: "localhost"
-
 config :logger,
   level: :info
 

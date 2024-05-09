@@ -13,12 +13,6 @@ config :smart,
 config :smart,
   student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter
 
-config :smart,
-  database: "mi_escuela",
-  username: "bryserna",
-  password: "Cambio1234*+",
-  hostname: "localhost"
-
 config :logger,
   level: :warning
 
@@ -30,3 +24,12 @@ config :opentelemetry,
 config :opentelemetry_exporter,
   otlp_protocol: :http_protobuf,
   otlp_endpoint: "http://localhost:4318"
+
+config :smart,
+  database: "postgres",
+  username: "postgres",
+  password: "system",
+  hostname: "localhost",
+  port: "5432",
+  pool_size: 10,
+  telemetry_prefix: [:elixir, :repo]

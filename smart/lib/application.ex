@@ -7,7 +7,7 @@ defmodule Smart.Application do
   alias Smart.Config.{AppConfig, ConfigHolder}
   alias Smart.Utils.CustomTelemetry
   alias Smart.Infrastructure.DrivenAdapters.Mnesia.Mnesia
-  alias Smart.Infrastructure.DrivenAdapters.Ecto.Repo
+  alias Smart.Infrastructure.Adapters.Repository.Repo
 
   use Application
   require Logger
@@ -19,6 +19,7 @@ defmodule Smart.Application do
 
     CustomTelemetry.custom_telemetry_events()
     OpentelemetryPlug.setup()
+    OpentelemetryEcto.setup([:elixir, :repo])
     opts = [strategy: :one_for_one, name: Smart.Supervisor]
     Supervisor.start_link(children, opts)
   end
@@ -43,8 +44,8 @@ defmodule Smart.Application do
 
   def env_children(_other_env) do
     [
-      {Mnesia, []},
-      {Repo, []}
+			{Repo, []},
+      {Mnesia, []}
     ]
   end
 end

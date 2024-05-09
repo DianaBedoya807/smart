@@ -42,8 +42,9 @@ defmodule Smart.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto_sql, "~> 3.11"},
-      {:myxql, "~> 0.6.4"},
+      {:opentelemetry_ecto, "~> 1.0"},
+      {:postgrex, "~> 0.16"},
+      {:ecto_sql, "~> 3.9"},
       {:opentelemetry_plug, git: "https://github.com/bancolombia/opentelemetry_plug.git", tag: "master"},
       {:opentelemetry_api, "~> 1.0"},
       {:opentelemetry_exporter, "~> 1.0"},
@@ -60,7 +61,7 @@ defmodule Smart.MixProject do
       {:cors_plug, "~> 3.0"},
       {:timex, "~> 3.0"},
       {:excoveralls, "~> 0.18", only: :test},
-      {:elixir_structure_manager, ">= 0.0.0", only: [:dev, :test]},
+      {:elixir_structure_manager, ">= 1.3.4", only: [:dev, :test]},
     ]
   end
 end

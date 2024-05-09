@@ -13,13 +13,6 @@ config :smart,
 config :smart,
   student_repository: Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter
 
-config :smart,
-  database: "mi_escuela",
-  username: "bryserna",
-  password: "Cambio1234*+",
-  hostname: "localhost",
-  port: 3306
-
 config :logger,
   level: :debug
 
@@ -27,3 +20,12 @@ config :logger,
 config :opentelemetry,
   span_processor: :batch,
   traces_exporter: {:otel_exporter_stdout, []}
+
+config :smart,
+  database: "postgres",
+  username: "postgres",
+  password: "system",
+  hostname: "localhost",
+  port: "5432",
+  pool_size: 10,
+  telemetry_prefix: [:elixir, :repo]
