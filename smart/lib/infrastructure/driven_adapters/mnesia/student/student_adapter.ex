@@ -1,9 +1,16 @@
 defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
+  # Alias for StudentRepositoryBehaviour module
   alias Smart.Domain.Behaviours.Student.StudentRepositoryBehaviour
+  # Alias for Student module
   alias Smart.Domain.Model.Student
 
+  # Implement the StudentRepositoryBehaviour
   @behaviour StudentRepositoryBehaviour
 
+  # Save a student in the Mnesia database
+  #
+  # @param student The student to save
+  # @return A tuple with :ok and a success message if the save is successful, :error otherwise
   def save_student(student) do
     {time, result} =
       :timer.tc(fn ->
@@ -27,6 +34,10 @@ defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Student.StudentAdapter do
     end
   end
 
+  # Fetch a student by their numberId from the Mnesia database
+  #
+  # @param numberId The numberId of the student to fetch
+  # @return A tuple with :ok and the student if found, :error otherwise
   def get_student(numberId) do
     {time, result} =
       :timer.tc(fn ->
