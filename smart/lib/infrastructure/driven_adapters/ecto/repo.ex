@@ -1,4 +1,4 @@
-defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Repo do
+defmodule Smart.Adapters.Ecto.Repo do
   # Alias for ConfigHolder module
   alias Smart.Config.ConfigHolder
   # Alias for SQL module

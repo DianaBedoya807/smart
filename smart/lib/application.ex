@@ -11,9 +11,9 @@ defmodule Smart.Application do
   # Alias for CustomTelemetry module
   alias Smart.Utils.CustomTelemetry
   # Alias for Mnesia module
-  alias Smart.Infrastructure.DrivenAdapters.Mnesia.Mnesia
+  alias Smart.Adapters.Mnesia
   # Alias for Repo module
-  alias Smart.Infrastructure.DrivenAdapters.Ecto.Repo
+  alias Smart.Adapters.Ecto.Repo
 
   # Use Application for OTP behaviours
   use Application
@@ -30,7 +30,7 @@ defmodule Smart.Application do
 
     children = with_plug_server(config) ++ all_env_children() ++ env_children(env)
 
-    CustomTelemetry.custom_telemetry_events()
+    CustomTelemetry.custom_telemetry_events()|> IO.inspect(label: "Resultado de custom_telemetry_events")
     OpentelemetryPlug.setup()
     opts = [strategy: :one_for_one, name: Smart.Supervisor]
     Supervisor.start_link(children, opts)

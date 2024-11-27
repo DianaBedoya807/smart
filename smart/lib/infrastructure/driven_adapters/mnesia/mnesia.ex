@@ -1,4 +1,4 @@
-defmodule Smart.Infrastructure.DrivenAdapters.Mnesia.Mnesia do
+defmodule Smart.Adapters.Mnesia do
   # Use GenServer for OTP behaviours
   use GenServer
   # Require Logger for logging

@@ -2,7 +2,7 @@ defmodule Smart.Infrastructure.DrivenAdapters.Ecto.Teacher.TeacherAdapter do
   # Alias for TeacherRepositoryBehaviour module
   alias Smart.Domain.Behaviours.Teacher.TeacherRepositoryBehaviour
   # Alias for Repo module
-  alias Smart.Infrastructure.DrivenAdapters.Ecto.Repo
+  alias Smart.Adapters.Ecto.Repo
   # Alias for TeacherSchema module
   alias Smart.Infrastructure.DrivenAdapters.Ecto.Teacher.TeacherSchema
 
