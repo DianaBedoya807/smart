@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "28227865-6b4e-4498-bd44-e2dbe5f212a7",
+		"name": "Elixir",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15427746"
+	},
+	"item": [
+		{
+			"name": "insert student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"name\": \"Bryan\",\r\n        \"lastname\": \"Serna Osorio\",\r\n        \"numberId\": \"1144169625\",\r\n        \"age\": 31,\r\n        \"gender\": \"M\",\r\n        \"address\": \"CR 7 BIS 63 43\",\r\n        \"email\": \"bryanseros@hotmail.com\",\r\n        \"phone\": \"3057728124\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/insert",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"insert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert teacher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"name\": \"Dionne\",\r\n        \"lastname\": \"Osorio\",\r\n        \"numberid\": \"66917936\",\r\n        \"age\": 50,\r\n        \"gender\": \"F\",\r\n        \"address\": \"CR 7 BIS 63 43\",\r\n        \"email\": \"bryanseros@gmail.com\",\r\n        \"phone\": \"3057728125\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/insertteacher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"insertteacher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "select student",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"numberId\": \"1144169625\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/getstudent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"getstudent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "select teacher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"numberid\": \"68945678\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/api/getteacher",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"api",
+						"getteacher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "metrics",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9568/metrics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9568",
+					"path": [
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
