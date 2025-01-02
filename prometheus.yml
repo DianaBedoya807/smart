@@ -1,0 +1,8 @@
+# prometheus.yml
+scrape_configs:
+  - job_name: 'smart_application'
+    static_configs:
+      - targets: ['host.docker.internal:9568']  # Apunta al puerto correcto donde tu aplicación expone métricas
+   # metrics_path: '/metrics'  # Asegúrate de que esta ruta esté configurada en tu aplicación
+
+
