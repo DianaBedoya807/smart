@@ -17,7 +17,5 @@ Después de la configuración, debemos instalar las dependencias definidas en el
 <img width="829" alt="Captura de pantalla 2025-01-14 a la(s) 9 04 34 a m" src="https://github.com/user-attachments/assets/ab761f7a-fd49-4782-ad62-597211c4a95b" />
 
 ## Colección de Archivos JSON
-Este proyecto incluye una colección de archivos JSON que contienen datos de ejemplo y configuraciones utilizadas por la aplicación. 
-
-[Smart_Collection.json](https://github.com/user-attachments/files/18411319/Smart_Collection.json)
+Este proyecto incluye una colección de archivos **JSON** que contienen datos de ejemplo y configuraciones utilizadas por la aplicación.  [Smart_Collection.json](https://github.com/user-attachments/files/18411319/Smart_Collection.json)
 
